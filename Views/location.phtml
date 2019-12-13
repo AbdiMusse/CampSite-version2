@@ -1,0 +1,35 @@
+<?php require_once ('template/header.phtml'); ?>
+
+    <div class="container">
+
+        <div class="col-sm-5 float-right" style="background-color: rgba(0,0,255,.1); height: 400px;">
+            <div style="padding-top: 25%;">
+                <div class="text-center"><img src="../images/search.png" alt="search" style="width: 15%; height: 15%;"></div>
+                <p class="text-center h2">Search by location</p>
+                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" class="form-inline">
+                        <input type="text" name="location" id="location" placeholder="Postcode, city, or area" class="form-control col-sm-10">
+                        <button type="submit" name="submitLocation" class="btn btn-primary col-sm-2" id="searchLocation">
+                            <img src="../images/next.png" alt="next">
+                        </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-sm-5" style="background-color: rgba(0,0,255,.1); height: 400px;">
+            <div style="padding-top: 25%;">
+                <div class="text-center"><img src="../images/location.png" alt="location" style="width: 15%; height: 15%;"></div>
+                <p class="text-center h2">Current Location</p>
+                <div class="text-center">
+                    <a href="../showLocation.php" class="btn btn-primary col-sm-12" id="gps">
+                        Find Campsites near me
+                        <img src="../images/next.png" alt="next">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+<?php require_once ('template/footer.phtml'); ?>
+
+<script src='../js/googleAutoComplete.js'></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6tBNMQzpIzDYa1uTth5NkeVgbNo5YLsA&libraries=places&callback=initAutocomplete" type="text/javascript"></script>

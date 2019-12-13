@@ -1,0 +1,96 @@
+<?php require_once ('template/header.phtml'); ?>
+
+<nav class="navbar navbar-light ">
+    <div style="margin: 10px 0px;" class="form-inline">
+        <input type="text" onkeyup="showHint(this.value)" placeholder="Search..." id="myInput" class="form-control" autocomplete="off">
+
+        <button type="button" id="campSearch" class="btn btn-outline-success  my-2 my-sm-0">Search</button>
+        <div id="endSearch"> </div>
+    </div>
+    <a href="../location.php" class="btn btn-outline-info  my-2 my-sm-0">Search by location</a>
+    <ul id="myUL" class="col-sm-12"></ul>
+</nav>
+
+<div class="row">
+    <div class="col-sm-12" id="toShowPrevious"> </div>
+    <div id="filter" class="col-sm-12 col-lg-3" style="margin-bottom: 10px;">
+        <div class="menu sticky-top  bg-light">
+            <div style="border: solid; padding: 10px;">
+                <div class="form-group">
+                    <label for="facilities" class="control-label">Facilities:</label><br>
+                    <div class="d-inline-block"><input type="checkbox" class="facility" value="toilet">Toilet</div>
+                    <div class="d-inline-block"><input type="checkbox" class="facility" value="shower">Shower</div>
+                    <div class="d-inline-block"><input type="checkbox" class="facility" value="laundry">Laundry</div>
+                    <div class="d-inline-block"><input type="checkbox" class="facility" value="water">Water</div>
+                    <div class="d-inline-block"><input type="checkbox" class="facility" value="electricity">Electricity</div>
+                    <div class="d-inline-block"><input type="checkbox" class="facility" value="internet">Internet Connection</div>
+                    <div class="d-inline-block"><input type="checkbox" class="facility" value="forDisable">Disabled Facilities</div>
+                </div>
+                <div class="form-group">
+                    <label for="idealFor" class="control-label">Ideal for:</label><br>
+                    <div class="d-inline-block"><input type="checkbox" class="idealFor" value="couple">Couples</div>
+                    <div class="d-inline-block"><input type="checkbox" class="idealFor" value="family">Family</div>
+                    <div class="d-inline-block"><input type="checkbox" class="idealFor" value="sameSex">Single Sex Group</div>
+                    <div class="d-inline-block"><input type="checkbox" class="idealFor" value="under18">Under 18</div>
+                </div>
+                <div class="form-group">
+                    <label for="rating" class="control-label">Ratings:</label><br>
+                    <div class="d-inline-block"><input type="radio" class="stars" value="0">0 Stars</div>
+                    <div class="d-inline-block"><input type="radio" class="stars" value="1">1 Star</div>
+                    <div class="d-inline-block"><input type="radio" class="stars" value="2">2 Stars</div>
+                    <div class="d-inline-block"><input type="radio" class="stars" value="3">3 Stars</div>
+                    <div class="d-inline-block"><input type="radio" class="stars" value="4">4 Stars</div>
+                    <div class="d-inline-block"><input type="radio" class="stars" value="5">5 Stars</div>
+                </div>
+                <div class="form-group">
+                    <label for="country" class="control-label">Country:</label><br>
+                    <?php foreach ($view->filterCountry as $item) { ?>
+                        <div class="d-inline-block"><input type="radio" name="country[]" class="country"
+                        value="<?php echo $item[0]; ?>"><?php echo $item[0]; ?></div>
+                    <?php } ?>
+                </div>
+                <input type="button" id="campFilter" class="btn btn-primary col-sm-12" value="Filter">
+            </div>
+        </div>
+    </div>
+
+    <input type="hidden" id="hidden-checkEmail" value='<?php if (isset($_SESSION['email'])) {
+        echo json_encode($_SESSION['email']);   } ?>'>
+
+    <input type="hidden" id="hidden-checkFav" value='<?php if ( isset($_SESSION['favourites']) ) {
+        echo json_encode($_SESSION['favourites']);   }; ?>' >
+
+    <div id="content-index" class="col-sm-12 col-lg-9"> </div>
+
+    <div class="col-sm-12">
+        <button type="button" id="showMore" class="btn btn-primary" style="width: 100%; margin-bottom: 10px;">Show More</button>
+    </div>
+
+</div>
+
+<?php require_once ('template/footer.phtml'); ?>
+
+<!-- Needed js files -->
+<script src='../js/ajaxCall.js'></script>
+<script src="../js/displayCamps.js"></script>
+<script src="../js/liveSearch.js"></script>
+<script src="../js/infiniteScroll.js"></script>
+
+<style>
+    #myUL {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        margin-top: -10px;
+    }
+
+    #myUL li a {
+        padding: 12px;
+        text-decoration: none;
+        display: block;
+    }
+
+    #myUL li a:hover {
+        background-color: #eee;
+    }
+</style>
